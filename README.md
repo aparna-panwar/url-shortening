@@ -28,7 +28,7 @@ The service employs a Base62 encryption technique to shorten URLs. Specifically,
 ### 1. Clone the Repository
 ```sh
 git clone https://github.com/aparna-panwar/url-shortening.git
-cd url-shortener
+cd url-shortening
 ```
 
 ### 2. Configure Environment Variables
