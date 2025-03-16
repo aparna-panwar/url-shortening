@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: URL Shortening API
+  version: 1.0.0
+  description: >-
+    The URL Shortening API provides functionality to convert long URLs into
+    shortened versions and redirect users to the original URL when accessed.
+
+
+    ### Features:
+
+    * **Shorten URL** – Converts a long URL into a short, unique alias.
+
+    * **Redirect** – When the short URL is accessed, it redirects to the
+    original long URL.
+servers:
+  - url: http://localhost.8080/api
+tags:
+  - name: urlShortening
+    description: Everything about shortening urls
+paths:
+  /shorten:
+    post:
+      tags:
+        - urlShortening
+      summary: Shortening the url
+      description: Provide url for conversion in response body
+      operationId: shortenTheUrl
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shorten_url_request'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/shorten_url_request'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/shorten_url_request'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shorten_url_response'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/shorten_url_response'
+  /redirection/{shortUrl}:
+    get:
+      tags:
+        - urlShortening
+      summary: Find actual url to redirect from short url
+      description: Returns a actual url
+      operationId: getActualUrlByShortUrl
+      parameters:
+        - name: shortUrl
+          in: path
+          description: Actual URL to return
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve_url_response'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/retrieve_url_response'
+        '404':
+          description: URL not found
+components:
+  schemas:
+    shorten_url_request:
+      type: object
+      properties:
+        original_url:
+          type: string
+          format: int64
+          example: www.longurl.com
+    shorten_url_response:
+      type: object
+      properties:
+        short_url:
+          type: string
+          format: int32
+          example: WGDT575757
+    retrieve_url_response:
+      type: object
+      properties:
+        original_url:
+          type: string
+          format: int64
+          example: www.longurl.com
