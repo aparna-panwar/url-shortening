@@ -75,7 +75,7 @@ This will start:
 POST /api/shorten
 Content-Type: application/json
 {
-  "longUrl": "https://mylongurl.com"
+  "originalUrl": "https://mylongurl.com"
 }
 ```
 **Response:**
@@ -95,7 +95,7 @@ GET /api/retrieve/{shortUrl}
 **Response:**
 ```json
 {
-  "actualUrl": "https://mylongurl.com"
+  "original": "https://mylongurl.com"
 }
 ```
 
