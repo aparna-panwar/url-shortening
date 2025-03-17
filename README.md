@@ -95,7 +95,7 @@ GET /api/retrieve/{shortUrl}
 **Response:**
 ```json
 {
-  "original": "https://mylongurl.com"
+  "originalUrl": "https://mylongurl.com"
 }
 ```
 
