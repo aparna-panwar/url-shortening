@@ -25,36 +25,32 @@ The service employs a Base62 encryption technique to shorten URLs. Specifically,
 ![img_1.png](img_1.png)
 
 ## Setup Instructions
+### Prerequisites
+- Java 17
+- Docker must be installed
+
 ### 1. Clone the Repository
 ```sh
 git clone https://github.com/aparna-panwar/url-shortening.git
 cd url-shortening
 ```
 
-### 2. Configure Environment Variables
-Create an `.env` file in the root directory with the following content:
-```
-POSTGRES_USER=urlshorten_user
-POSTGRES_PASSWORD=Q1W2E3R4T5Y6
-POSTGRES_DB=urlshortening
-```
-
-### 3. Build the Project
+### 2. Build the Project
 ```sh
 ./gradlew clean build
 ```
 
-### 4. Run with Docker
+### 3. To run the service with all dependencies within Docker
 ```sh
 docker-compose up -d
 ```
 
-### 4. Stop Docker
+### 4. To stop the docker container
 ```sh
 docker-compose down
 ```
 
-This will start:
+This will start following services in docker containers:
 - Spring Boot application
 - PostgreSQL database
 - Prometheus for monitoring
@@ -65,7 +61,15 @@ This will start:
 - **Prometheus**: `http://localhost:9090`
 - **Grafana**: `http://localhost:3000` (Default credentials: `admin/admin`)
 
+### 6. Triubleshooting 
+- Make sure no other services are running on following ports.
+  1. 8080
+  2. 9090
+  3. 3000
+
 ## API Endpoints
+You can find the [postman collection](./src/main/resources/UrlShorteningApplication.postman_collection) for all the Rest APIs.
+
 ### 1. Shorten a long URL
     This API allows you to shorten long URLs by encoding them in Base62 and storing 
     the mapping in a database. If the same URL is provided again, it will return the existing 
